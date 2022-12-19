@@ -31,3 +31,12 @@ texture = ExtResource( 2 )
 
 [node name="wheel" type="Sprite" parent="cannon"]
 texture = ExtResource( 3 )
+
+[node name="enemy_spawn_timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="enemy_spawn_position" type="Position2D" parent="."]
+position = Vector2( 1200, 500 )
+
+[connection signal="timeout" from="enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
