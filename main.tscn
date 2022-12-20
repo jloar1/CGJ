@@ -1,12 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://cannon_barrel.png" type="Texture" id=2]
 [ext_resource path="res://cannon_wheel.png" type="Texture" id=3]
 [ext_resource path="res://grass.png" type="Texture" id=4]
+[ext_resource path="res://santa.png" type="Texture" id=5]
+[ext_resource path="res://santa.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 640, 40 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 195, 70 )
 
 [node name="main" type="Node2D"]
 script = ExtResource( 1 )
@@ -32,11 +37,59 @@ texture = ExtResource( 2 )
 [node name="wheel" type="Sprite" parent="cannon"]
 texture = ExtResource( 3 )
 
-[node name="enemy_spawn_timer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
+[node name="santa" type="StaticBody2D" parent="."]
+position = Vector2( 86, 564 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 6 )
 
-[node name="enemy_spawn_position" type="Position2D" parent="."]
-position = Vector2( 1200, 500 )
+[node name="sprite" type="Sprite" parent="santa"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
 
-[connection signal="timeout" from="enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
+[node name="collision" type="CollisionShape2D" parent="santa"]
+position = Vector2( 110, -1 )
+shape = SubResource( 2 )
+
+[node name="health_bar" type="ProgressBar" parent="santa"]
+margin_left = -60.0
+margin_top = -111.0
+margin_right = 4.0
+margin_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 100, 15 )
+step = 1.0
+value = 100.0
+percent_visible = false
+
+[node name="wave_control" type="Node2D" parent="."]
+
+[node name="wave" type="Label" parent="wave_control"]
+margin_left = 610.0
+margin_right = 670.0
+margin_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 60, 30 )
+text = "Wave 1"
+align = 1
+valign = 1
+
+[node name="enemies_left" type="ProgressBar" parent="wave_control"]
+margin_left = 520.0
+margin_top = 30.0
+margin_right = 760.0
+margin_bottom = 60.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 240, 30 )
+max_value = 1.0
+
+[node name="spawn_timer" type="Timer" parent="wave_control"]
+wait_time = 2.0
+
+[node name="enemy_spawn_position" type="Position2D" parent="wave_control"]
+position = Vector2( 1223, 523 )
+
+[connection signal="timeout" from="wave_control/spawn_timer" to="." method="_on_spawn_timer_timeout"]

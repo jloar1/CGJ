@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-export var damage_amount = 5
+var damage_amount = 6
 
 func _on_present_body_entered(body):
 	if body is RigidBody2D:
