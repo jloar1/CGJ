@@ -17,12 +17,16 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		cannon_angle = clamp((event.position - $cannon/axle.global_position).angle(), -PI/2, 0)
 		$cannon/axle.rotation = cannon_angle
+	
+	if not $cannon/cooldown.is_stopped():
+		return
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			var present_instance = present.instance()
 			add_child(present_instance)
 			present_instance.position = $cannon/axle.global_position + (Vector2.RIGHT.rotated(cannon_angle) * 200)
 			present_instance.linear_velocity = Vector2.RIGHT.rotated(cannon_angle) * 500
+			$cannon/cooldown.start()
 
 func _on_enemy_spawn_timer_timeout():
 	var enemy_instance = enemy.instance()
