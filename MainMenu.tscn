@@ -1,0 +1,124 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://arial.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://main.tscn" type="PackedScene" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.203922, 0.764706, 0.333333, 0.490196 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.203922, 0.764706, 0.333333, 0.686275 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.203922, 0.764706, 0.333333, 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 60
+font_data = ExtResource( 1 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -2.0
+margin_bottom = -4.0
+script = ExtResource( 2 )
+mainGameScene = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1278.0
+margin_bottom = 720.0
+color = Color( 0.878431, 0.235294, 0.235294, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 1278.0
+margin_bottom = 712.0
+custom_constants/margin_right = 200
+custom_constants/margin_top = 75
+custom_constants/margin_left = 200
+custom_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 200.0
+margin_top = 75.0
+margin_right = 1093.0
+margin_bottom = 662.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 893.0
+margin_bottom = 291.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 1 )
+text = "Untitled Present
+Game"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 295.0
+margin_right = 893.0
+margin_bottom = 587.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 15
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+margin_right = 893.0
+margin_bottom = 138.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Start" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+margin_left = 50.0
+margin_right = 843.0
+margin_bottom = 138.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Start"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+margin_top = 153.0
+margin_right = 893.0
+margin_bottom = 292.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3"]
+margin_left = 50.0
+margin_right = 843.0
+margin_bottom = 139.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 6 )
+text = "Made By: Aftyr, Fallendusk89,
+V4LK, and SteveBase"
+align = 1
+valign = 1
+
+[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Start" to="." method="_on_Start_button_up"]
