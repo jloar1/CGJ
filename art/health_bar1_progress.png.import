@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grass.png-79cf597cc1adecdff9d12adae9606f9b.stex"
+path="res://.import/health_bar1_progress.png-aa3488a509d11ee8527b2103e3af897b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://grass.png"
-dest_files=[ "res://.import/grass.png-79cf597cc1adecdff9d12adae9606f9b.stex" ]
+source_file="res://art/health_bar1_progress.png"
+dest_files=[ "res://.import/health_bar1_progress.png-aa3488a509d11ee8527b2103e3af897b.stex" ]
 
 [params]
 

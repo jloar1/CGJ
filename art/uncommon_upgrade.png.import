@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cannon_wheel.png-44c69b78c2dbf80984a2db6bba4b59af.stex"
+path="res://.import/uncommon_upgrade.png-2d7dd4a6e713d4abace9db37705e802c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cannon_wheel.png"
-dest_files=[ "res://.import/cannon_wheel.png-44c69b78c2dbf80984a2db6bba4b59af.stex" ]
+source_file="res://art/uncommon_upgrade.png"
+dest_files=[ "res://.import/uncommon_upgrade.png-2d7dd4a6e713d4abace9db37705e802c.stex" ]
 
 [params]
 

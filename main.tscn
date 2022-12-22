@@ -1,17 +1,50 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
-[ext_resource path="res://cannon_barrel.png" type="Texture" id=2]
-[ext_resource path="res://cannon_wheel.png" type="Texture" id=3]
-[ext_resource path="res://grass.png" type="Texture" id=4]
-[ext_resource path="res://santa.png" type="Texture" id=5]
+[ext_resource path="res://art/cannon_barrel.png" type="Texture" id=2]
+[ext_resource path="res://art/cannon_wheel.png" type="Texture" id=3]
+[ext_resource path="res://art/icetiles.png" type="Texture" id=4]
+[ext_resource path="res://art/santa.png" type="Texture" id=5]
 [ext_resource path="res://santa.gd" type="Script" id=6]
+[ext_resource path="res://art/health_bar1.png" type="Texture" id=7]
+[ext_resource path="res://art/health_bar1_progress.png" type="Texture" id=8]
+[ext_resource path="res://art/background02a.png" type="Texture" id=9]
+[ext_resource path="res://shaders/glow.tres" type="Shader" id=10]
+[ext_resource path="res://shaders/blur.tres" type="Shader" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 640, 40 )
+extents = Vector2( 720, 40 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 10 )
+shader_param/line_color = Color( 1, 1, 1, 1 )
+shader_param/line_thickness = 0.0
+shader_param/add_margins = true
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 195, 70 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 14 )
+shader_param/blurSize = 20
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 10 )
+shader_param/line_color = Color( 0.243137, 1, 0, 1 )
+shader_param/line_thickness = 1.0
+shader_param/add_margins = true
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 10 )
+shader_param/line_color = Color( 1, 0.678431, 0, 1 )
+shader_param/line_thickness = 1.0
+shader_param/add_margins = true
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 10 )
+shader_param/line_color = Color( 1, 0, 0, 1 )
+shader_param/line_thickness = 1.0
+shader_param/add_margins = true
 
 [node name="main" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,9 +53,28 @@ script = ExtResource( 1 )
 position = Vector2( 640, 680 )
 
 [node name="sprite" type="Sprite" parent="floor"]
+position = Vector2( -400, 0 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 40, 8, 96, 16 )
+
+[node name="sprite2" type="Sprite" parent="floor"]
+position = Vector2( 80, 0 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 40, 8, 96, 16 )
+
+[node name="sprite3" type="Sprite" parent="floor"]
+position = Vector2( 560, 0 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 40, 8, 96, 16 )
 
 [node name="collison" type="CollisionShape2D" parent="floor"]
+position = Vector2( 80, 0 )
 shape = SubResource( 1 )
 
 [node name="cannon" type="Node2D" parent="."]
@@ -40,6 +92,7 @@ texture = ExtResource( 3 )
 [node name="cooldown" type="Timer" parent="cannon"]
 wait_time = 0.6
 one_shot = true
+autostart = true
 
 [node name="santa" type="StaticBody2D" parent="."]
 position = Vector2( 86, 564 )
@@ -48,6 +101,7 @@ collision_mask = 2
 script = ExtResource( 6 )
 
 [node name="sprite" type="Sprite" parent="santa"]
+material = SubResource( 5 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 5 )
 
@@ -55,17 +109,19 @@ texture = ExtResource( 5 )
 position = Vector2( 110, -1 )
 shape = SubResource( 2 )
 
-[node name="health_bar" type="ProgressBar" parent="santa"]
+[node name="health_bar" type="TextureProgress" parent="santa"]
 margin_left = -60.0
 margin_top = -111.0
 margin_right = 4.0
 margin_bottom = -96.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_min_size = Vector2( 100, 15 )
-step = 1.0
-value = 100.0
-percent_visible = false
+rect_min_size = Vector2( 100, 16 )
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
 
 [node name="wave_control" type="Node2D" parent="."]
 
@@ -94,6 +150,87 @@ max_value = 1.0
 wait_time = 2.0
 
 [node name="enemy_spawn_position" type="Position2D" parent="wave_control"]
-position = Vector2( 1223, 523 )
+position = Vector2( 1150, 600 )
 
+[node name="wave_end" type="Timer" parent="wave_control"]
+wait_time = 2.0
+one_shot = true
+
+[node name="blur" type="Sprite" parent="."]
+material = SubResource( 6 )
+position = Vector2( 250, 500 )
+z_index = -10
+texture = ExtResource( 9 )
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 250, 500 )
+z_index = -11
+texture = ExtResource( 9 )
+
+[node name="upgrade_menu" type="Node2D" parent="."]
+visible = false
+z_index = 11
+
+[node name="center" type="CenterContainer" parent="upgrade_menu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 1280, 720 )
+
+[node name="vbox" type="VBoxContainer" parent="upgrade_menu/center"]
+margin_left = 390.0
+margin_top = 130.0
+margin_right = 890.0
+margin_bottom = 590.0
+custom_constants/separation = 80
+alignment = 1
+
+[node name="upgrade1" type="TextureButton" parent="upgrade_menu/center/vbox"]
+material = SubResource( 7 )
+margin_right = 500.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 500, 100 )
+
+[node name="label" type="Label" parent="upgrade_menu/center/vbox/upgrade1"]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 500, 100 )
+text = "Testing"
+align = 1
+valign = 1
+
+[node name="upgrade2" type="TextureButton" parent="upgrade_menu/center/vbox"]
+material = SubResource( 9 )
+margin_top = 180.0
+margin_right = 500.0
+margin_bottom = 280.0
+rect_min_size = Vector2( 500, 100 )
+
+[node name="label" type="Label" parent="upgrade_menu/center/vbox/upgrade2"]
+margin_right = 500.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 500, 100 )
+text = "Testing"
+align = 1
+valign = 1
+
+[node name="upgrade3" type="TextureButton" parent="upgrade_menu/center/vbox"]
+material = SubResource( 8 )
+margin_top = 360.0
+margin_right = 500.0
+margin_bottom = 460.0
+rect_min_size = Vector2( 500, 100 )
+
+[node name="label" type="Label" parent="upgrade_menu/center/vbox/upgrade3"]
+margin_right = 500.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 500, 100 )
+text = "Testing"
+align = 1
+valign = 1
+
+[connection signal="timeout" from="cannon/cooldown" to="." method="shoot"]
 [connection signal="timeout" from="wave_control/spawn_timer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="wave_control/wave_end" to="." method="select_upgrade"]
+[connection signal="pressed" from="upgrade_menu/center/vbox/upgrade1" to="." method="next_wave"]
+[connection signal="pressed" from="upgrade_menu/center/vbox/upgrade2" to="." method="next_wave"]
+[connection signal="pressed" from="upgrade_menu/center/vbox/upgrade3" to="." method="next_wave"]

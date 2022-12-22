@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://warrior.gd" type="Script" id=1]
+[ext_resource path="res://archer.gd" type="Script" id=1]
 [ext_resource path="res://art/icon.png" type="Texture" id=2]
 [ext_resource path="res://art/health_bar2.png" type="Texture" id=3]
 [ext_resource path="res://art/health_bar2_progress.png" type="Texture" id=4]
@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[node name="warrior" type="KinematicBody2D"]
+[node name="archer" type="KinematicBody2D"]
 collision_mask = 2
 script = ExtResource( 1 )
 
@@ -16,6 +16,7 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="sprite" type="Sprite" parent="."]
+modulate = Color( 0.94902, 0.694118, 1, 1 )
 texture = ExtResource( 2 )
 
 [node name="health_bar" type="TextureProgress" parent="."]
@@ -33,9 +34,10 @@ texture_progress = ExtResource( 4 )
 
 [node name="attack_raycast" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( -50, 0 )
+cast_to = Vector2( -400, 0 )
 collision_mask = 2
 
 [node name="attack_cooldown" type="Timer" parent="."]
+wait_time = 2.0
 
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

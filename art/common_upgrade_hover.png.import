@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cannon_barrel.png-8a75432669328b83b39ae8d111ed3da3.stex"
+path="res://.import/common_upgrade_hover.png-ea225e9b4e480fc99c5cb369be02e69f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cannon_barrel.png"
-dest_files=[ "res://.import/cannon_barrel.png-8a75432669328b83b39ae8d111ed3da3.stex" ]
+source_file="res://art/common_upgrade_hover.png"
+dest_files=[ "res://.import/common_upgrade_hover.png-ea225e9b4e480fc99c5cb369be02e69f.stex" ]
 
 [params]
 
