@@ -184,9 +184,9 @@ func update_button(current_button, current_upgrade):
 func select_upgrade():
 	paused = true
 	
-	var rand_upgrade1 = rng.randi_range(0, upgrade_pool.size())
-	var rand_upgrade2 = rng.randi_range(0, upgrade_pool.size())
-	var rand_upgrade3 = rng.randi_range(0, upgrade_pool.size())
+	var rand_upgrade1 = rng.randi_range(0, upgrade_pool.size() - 1)
+	var rand_upgrade2 = rng.randi_range(0, upgrade_pool.size() - 1)
+	var rand_upgrade3 = rng.randi_range(0, upgrade_pool.size() - 1)
 	while upgrade_pool[rand_upgrade2] == upgrade_pool[rand_upgrade1]:
 		rand_upgrade2 = rng.randi_range(0, upgrade_pool.size())
 	while upgrade_pool[rand_upgrade3] == upgrade_pool[rand_upgrade1] or upgrade_pool[rand_upgrade3] == upgrade_pool[rand_upgrade2]:

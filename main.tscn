@@ -150,7 +150,7 @@ max_value = 1.0
 wait_time = 2.0
 
 [node name="enemy_spawn_position" type="Position2D" parent="wave_control"]
-position = Vector2( 1150, 600 )
+position = Vector2( 1350, 600 )
 
 [node name="wave_end" type="Timer" parent="wave_control"]
 wait_time = 2.0
@@ -163,7 +163,7 @@ z_index = -10
 texture = ExtResource( 9 )
 
 [node name="background" type="Sprite" parent="."]
-position = Vector2( 250, 500 )
+position = Vector2( 240, 193 )
 z_index = -11
 texture = ExtResource( 9 )
 
